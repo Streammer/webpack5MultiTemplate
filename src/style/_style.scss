@@ -1,15 +1,18 @@
 body {
-  font-family: 'Montserrat';
-  background-color: $back;
-  color: $text;
-
+  font-family: 'Rubik';
+  background-color: $gray;
+  color: $custom-green;
+  transition: all .5s;
+  user-select: none;
+}
+h1 {
+  text-align: center;
 }
 
-.image {
-  width: 500px;
-  height: 300px;
-  background-size: contain;
-  background-position: center;
+.logo-css {
+  width: 100%;
+  min-height: 10px;
+  height:500px;
+  background-image: url('../img/swedencopy.svg');
   background-repeat: no-repeat;
-  background-image: url('../img/methed.jpg');
 }
