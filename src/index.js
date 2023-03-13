@@ -1,3 +1,3 @@
-import './index.html';
+import './template.html';
 import './index.scss';
 import './js/main.js'
