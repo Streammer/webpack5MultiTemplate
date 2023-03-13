@@ -34,12 +34,13 @@ window.onload = () => {
     }
 
 
-
     //create the “player ready” callback 
 
-    function onPlayerReady() {
-        player.pauseVideo();
-    }
+    const onPlayerReady = () => player.pauseVideo();
+    
+    // function onPlayerReady() {
+    //     player.pauseVideo();
+    // }
 
     //close modal window
 
@@ -68,4 +69,3 @@ window.onload = () => {
         headerMobile.classList.toggle('active')
     })
 }
-
