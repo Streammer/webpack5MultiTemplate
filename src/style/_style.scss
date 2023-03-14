@@ -4,15 +4,128 @@ body {
   color: $custom-green;
   transition: all .5s;
   user-select: none;
+  font-size: 62.5%;
 }
 h1 {
   text-align: center;
 }
 
+img {
+  display: block;
+  width: 100%;
+}
+
 .logo-css {
   width: 100%;
   min-height: 10px;
-  height:500px;
-  background-image: url('../img/swedencopy.svg');
+  background-image: url('../img/cat-with-book.svg');
   background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+
+.container {
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.main-wrapper {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-areas:
+  "header header header"
+  "logo-png logo-svg logo-css";
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  align-content: center;
+  justify-content: center;
+  grid-gap: 1rem;
+}
+.caption {
+  font-size: 35px;
+  font-weight: 700;
+  grid-area: header;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.logo-png {
+  grid-area: logo-png;
+}
+
+.logo-svg {
+  grid-area: logo-svg
+}
+
+.logo-css {
+  grid-area: logo-css;
+}
+
+.logo {
+  display: flex;
+}
+
+@media (max-width: 108em) {
+	html {
+		font-size: 9px;
+	}
+}
+
+@media (max-width: 105em) {
+	html {
+		font-size: 8.75px;
+	}
+}
+
+@media (max-width: 91.5em) {
+	html {
+		font-size: 7.9px;
+	}
+}
+
+@media (max-width: 91em) {
+	html {
+		font-size: 8.4px;
+	}
+}
+
+@media (max-width: 90em) {
+	html {
+		font-size: 7.9px;
+	}
+}
+
+@media (max-width: 80em) {
+	html {
+		font-size: 7.2px;
+	}
+}
+
+@media (max-width: 72em) {
+	html {
+		font-size: 6.5px;
+	}
+}
+
+@media (max-width: 64em) {
+	html {
+		font-size: 5.5px;
+	}
+}
+
+@media (max-width: 48em) {
+  .wrapper {
+    grid-template-areas:
+    "header header header"
+    "logo-png logo-png logo-png"
+    "logo-svg logo-svg logo-svg"
+    "logo-css logo-css logo-css";
+  }
+  .caption {
+    font-size: 5rem;
+  }
 }
