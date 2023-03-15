@@ -9,7 +9,12 @@
     "build": "webpack --node-env=production",
     "clear": "rd /s /q dist"
   },
-  "keywords": ["webpack", "html", "css", "javaScript"],
+  "keywords": [
+    "webpack",
+    "html",
+    "css",
+    "javaScript"
+  ],
   "author": "lukdmitrij@yandex.ru",
   "license": "ISC",
   "browserslist": [
@@ -18,9 +23,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/core": "^7.20.7",
+    "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
-    "babel-loader": "^9.1.0",
+    "babel-loader": "^9.1.2",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "filemanager-webpack-plugin": "^8.0.0",
