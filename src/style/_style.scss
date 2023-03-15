@@ -16,7 +16,7 @@ img, object {
 }
 
 .container {
-  max-width: 70rem;
+  max-width: 100rem;
   margin: 0 auto;
   padding: 1rem;
 }
@@ -27,6 +27,7 @@ img, object {
 }
 
 .grid {
+  // display: none;
   display: grid;
   grid-template-areas:
   "header header header"
