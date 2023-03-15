@@ -15,28 +15,18 @@ img {
   width: 100%;
 }
 
-.logo-css {
-  width: 100%;
-  min-height: 10px;
-  background-image: url('../img/cat-with-book.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center;
-}
-
 .container {
   max-width: 100rem;
   margin: 0 auto;
   padding: 1rem;
 }
 
-.main-wrapper {
-  height: 100%;
+.wrapper {
   overflow: hidden;
   min-height: 100%;
 }
 
-.wrapper {
+.grid {
   display: grid;
   grid-template-areas:
   "header header header"
@@ -45,7 +35,7 @@ img {
   grid-auto-flow: row;
   align-content: center;
   justify-content: center;
-  grid-gap: 1rem;
+  // grid-gap: 1rem;
 }
 .caption {
   font-size: 35px;
@@ -55,16 +45,26 @@ img {
   margin-bottom: 4rem;
 }
 
+.logo:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.logo-css {
+  width: 100%;
+  min-height: 10px;
+  background-image: url('../img/cat-with-book.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  grid-area: logo-css;
+}
+
 .logo-png {
   grid-area: logo-png;
 }
 
 .logo-svg {
   grid-area: logo-svg
-}
-
-.logo-css {
-  grid-area: logo-css;
 }
 
 .logo {
@@ -120,7 +120,7 @@ img {
 }
 
 @media (max-width: 48em) {
-  .wrapper {
+  .grid {
     grid-template-areas:
     "header header header"
     "logo-png logo-png logo-png"
@@ -129,5 +129,12 @@ img {
   }
   .caption {
     font-size: 5rem;
+  }
+  .logo:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+  .logo-css {
+    min-height: 500px;
   }
 }
