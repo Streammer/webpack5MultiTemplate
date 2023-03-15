@@ -21,7 +21,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
-    filename: '[name].[contenthash:2].js',
+    filename: '[name].js',
     assetModuleFilename: 'assets/img/[name][ext]',
   },
   plugins: [
@@ -31,7 +31,7 @@ module.exports = {
       filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:2].css',
+      filename: '[name].css',
     }),
     new CopyPlugin({
       patterns: [
@@ -43,6 +43,10 @@ module.exports = {
           from: "src/static",
           to: path.join(__dirname, 'dist', 'static', '[name][ext]')
         },
+        {
+          from: "src/img",
+          to: path.resolve(__dirname, 'dist', 'img', '[name][ext]')
+        }
       ],
     }),
     new FileManagerPlugin({
@@ -133,7 +137,7 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.m?js$/i,
+        test: /\.m?js|jsx$/i,
         use: 'babel-loader',
         exclude: /(node_modules|bower_components)/,
         
