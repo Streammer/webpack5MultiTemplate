@@ -10,9 +10,9 @@ h1 {
   text-align: center;
 }
 
-img {
+img, object {
   display: block;
-  width: 100%;
+  max-width: 100%;
 }
 
 .container {
@@ -30,12 +30,14 @@ img {
   display: grid;
   grid-template-areas:
   "header header header"
-  "logo-png logo-svg logo-css";
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  "logo-png logo-svg logo-css"
+  "static-logo1 static-logo2 static-logo3";
+  grid-template-columns: repeat(3, minmax(12rem, 1fr));
+  // grid-template-rows: repeat(auto-fit, minmax(0, 250px));
   grid-auto-flow: row;
   align-content: center;
   justify-content: center;
-  // grid-gap: 1rem;
+  grid-gap: 2rem;
 }
 .caption {
   font-size: 35px;
@@ -43,10 +45,6 @@ img {
   grid-area: header;
   text-align: center;
   margin-bottom: 4rem;
-}
-
-.logo:not(:last-child) {
-  margin-right: 1rem;
 }
 
 .logo-css {
@@ -67,7 +65,28 @@ img {
   grid-area: logo-svg
 }
 
+.static-logo1 {
+  grid-area: static-logo1;
+}
+
+.static-logo2 {
+  grid-area: static-logo2;
+
+  svg {
+    max-height: 350px;
+  }
+}
+
+.static-logo3 {
+  grid-area: static-logo3;
+}
+
+.static-logo1 > *, .static-logo2 > *, .static-logo3 > * {
+  margin: 0 auto;
+}
+
 .logo {
+  align-items: center;
   display: flex;
 }
 
@@ -125,15 +144,15 @@ img {
     "header header header"
     "logo-png logo-png logo-png"
     "logo-svg logo-svg logo-svg"
-    "logo-css logo-css logo-css";
+    "logo-css logo-css logo-css"
+    "static-logo1 static-logo1 static-logo1"
+    "static-logo2 static-logo2 static-logo2"
+    "static-logo3 static-logo3 static-logo3";
   }
   .caption {
     font-size: 5rem;
   }
-  .logo:not(:last-child) {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
+
   .logo-css {
     min-height: 500px;
   }

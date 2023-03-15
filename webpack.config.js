@@ -26,8 +26,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      // template: path.resolve(__dirname, 'src', 'template.html'),
-      template: path.join(__dirname, 'src', 'template.pug'),
+      template: path.resolve(__dirname, 'src', 'template.html'),
+      // template: path.join(__dirname, 'src', 'template.pug'),
       filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
@@ -39,6 +39,10 @@ module.exports = {
           from: "src/fonts",
           to: path.join(__dirname, 'dist', 'fonts', '[name][ext]')
         },
+        {
+          from: "src/static",
+          to: path.join(__dirname, 'dist', 'static', '[name][ext]')
+        },
       ],
     }),
     new FileManagerPlugin({
@@ -46,14 +50,14 @@ module.exports = {
         onStart: {
           delete: ['dist'],
         },
-        onEnd: {
-          copy: [
-            {
-              source: path.join('src', 'static'),
-              destination: 'dist/static',
-            },
-          ],
-        },
+        // onEnd: {
+        //   copy: [
+        //     {
+        //       source: path.join('src', 'static'),
+        //       destination: 'dist/static',
+        //     },
+        //   ],
+        // },
       }
     }),
   ],
