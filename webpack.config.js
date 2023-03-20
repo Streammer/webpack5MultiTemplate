@@ -3,6 +3,7 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
+const { VueLoaderPlugin } = require('vue-loader');
 
 const mode = process.env.NODE_ENV || 'development';
 const devMode = mode === 'development';
@@ -16,6 +17,10 @@ module.exports = {
   devServer: {
     port: 3000,
     open: true,
+  },
+  resolve: {
+    // Add `.ts` as a resolvable extension.
+    extensions: ['.ts', '.js']
   },
   entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
@@ -33,6 +38,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:2].css',
     }),
+    new VueLoaderPlugin(),
     new CopyPlugin({
       patterns: [
         {
@@ -74,7 +80,7 @@ module.exports = {
       {
         test: /\.(c|sa|sc)ss$/i,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -135,14 +141,19 @@ module.exports = {
       {
         test: /\.m?js$/i,
         use: 'babel-loader',
-        exclude: /(node_modules|bower_components)/,
-        
+        exclude: /(node_modules|bower_components)/  &&
+        !/\.vue\.js/.test(file),
+
         // use: {
         //   loader: 'babel-loader',
         //   options: {
         //     presets: ['@babel/preset-env'],
         //   },
         // },
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
       },
     ],
   },
