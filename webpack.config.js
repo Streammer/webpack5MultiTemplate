@@ -152,9 +152,12 @@ module.exports = {
         // },
       },
       {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },
+        test: /\.vue$/i,
+        exclude: /(node_modules)/,
+        use: {
+          loader: "vue-loader",
+        },
+      }
     ],
   },
 };
