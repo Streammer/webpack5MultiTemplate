@@ -141,14 +141,15 @@ img, object {
 
 @media (max-width: 48em) {
   .grid {
+    grid-template-columns: 1fr;
     grid-template-areas:
-    "header header header"
-    "logo-png logo-png logo-png"
-    "logo-svg logo-svg logo-svg"
-    "logo-css logo-css logo-css"
-    "static-logo1 static-logo1 static-logo1"
-    "static-logo2 static-logo2 static-logo2"
-    "static-logo3 static-logo3 static-logo3";
+    "header"
+    "logo-png "
+    "logo-svg"
+    "logo-css"
+    "static-logo1"
+    "static-logo2"
+    "static-logo3";
   }
   .caption {
     font-size: 5rem;
