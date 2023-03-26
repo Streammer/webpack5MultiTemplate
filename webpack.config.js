@@ -3,7 +3,7 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
-const { VueLoaderPlugin } = require('vue-loader');
+const { VueLoaderPlugin } = require('vue-loader')
 
 const mode = process.env.NODE_ENV || 'development';
 const devMode = mode === 'development';
@@ -30,6 +30,7 @@ module.exports = {
     assetModuleFilename: 'assets/img/[name][ext]',
   },
   plugins: [
+    new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'template.html'),
       // template: path.join(__dirname, 'src', 'template.pug'),
@@ -38,7 +39,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:2].css',
     }),
-    new VueLoaderPlugin(),
     new CopyPlugin({
       patterns: [
         {
