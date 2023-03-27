@@ -1,163 +1,115 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader')
 
-const mode = process.env.NODE_ENV || 'development';
-const devMode = mode === 'development';
-const target = devMode ? 'web' : 'browserslist';
-const devtool = devMode ? 'source-map' : undefined;
-
 module.exports = {
-  mode,
-  target,
-  devtool,
-  devServer: {
-    port: 3000,
-    open: true,
-  },
-  resolve: {
-    // Add `.ts` as a resolvable extension.
-    extensions: ['.ts', '.js']
-  },
-  entry: path.resolve(__dirname, 'src', 'index.js'),
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
-    filename: '[name].[contenthash:2].js',
-    assetModuleFilename: 'assets/img/[name][ext]',
-  },
-  plugins: [
-    new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src', 'template.html'),
-      // template: path.join(__dirname, 'src', 'template.pug'),
-      filename: 'index.html',
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:2].css',
-    }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: "src/fonts",
-          to: path.join(__dirname, 'dist', 'fonts', '[name][ext]')
-        },
-        {
-          from: "src/static",
-          to: path.join(__dirname, 'dist', 'static', '[name][ext]')
-        },
-      ],
-    }),
-    new FileManagerPlugin({
-      events: {
-        onStart: {
-          delete: ['dist'],
-        },
-        // onEnd: {
-        //   copy: [
-        //     {
-        //       source: path.join('src', 'static'),
-        //       destination: 'dist/static',
-        //     },
-        //   ],
-        // },
-      }
-    }),
-  ],
-  module: {
-    rules: [
-      {
-        test: /\.html$/i,
-        loader: 'html-loader',
-      },
-      {
-        test: /\.pug$/,
-        loader: 'pug-loader',
-      },
-      {
-        test: /\.(c|sa|sc)ss$/i,
-        use: [
-          devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [require('postcss-preset-env')],
-              },
-            },
-          },
-          'group-css-media-queries-loader',
-          {
-            loader: 'resolve-url-loader',
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'fonts/[name][ext]',
-        },
-      },
-      {
-        test: /\.(jpe?g|png|webp|gif|svg)$/i,
-        use: devMode
-          ? []
-          : [
+    resolve: {
+        // Add `.ts` as a resolvable extension.
+        extensions: ['.ts', '.js']
+    },
+    entry: path.join(__dirname, 'src', 'index.js'),
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: 'index.[contenthash:4].js',
+        assetModuleFilename: path.join('images', '[name].[contenthash:4][ext]'),
+    },
+    module: {
+        rules: [
             {
-              loader: 'image-webpack-loader',
-              options: {
-                mozjpeg: {
-                  progressive: true,
-                },
-                optipng: {
-                  enabled: false,
-                },
-                pngquant: {
-                  quality: [0.65, 0.9],
-                  speed: 4,
-                },
-                gifsicle: {
-                  interlaced: false,
-                },
-                webp: {
-                  quality: 75,
-                },
-              },
+                test: /\.js$/,
+                use: 'babel-loader',
+                exclude: file => (
+                    /node_modules/.test(file) &&
+                    !/\.vue\.js/.test(file)
+                )
             },
-          ],
-        type: 'asset/resource',
-      },
-      {
-        test: /\.m?js$/i,
-        use: 'babel-loader',
-        exclude: /(node_modules|bower_components)/  &&
-        !/\.vue\.js/.test(file),
-
-        // use: {
-        //   loader: 'babel-loader',
-        //   options: {
-        //     presets: ['@babel/preset-env'],
-        //   },
-        // },
-      },
-      {
-        test: /\.vue$/i,
-        exclude: /(node_modules)/,
-        use: {
-          loader: "vue-loader",
-        },
-      }
+            {
+                test: /\.pug$/,
+                loader: 'pug-plain-loader'
+            },
+            {
+                test: /\.(scss|css)$/,
+                use: [
+                    process.env.NODE_ENV !== 'production'
+                    ? 'vue-style-loader'
+                    : MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader'
+                ],
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
+            {
+                test: /\.svg$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: path.join('icons', '[name].[contenthash:4][ext]'),
+                },
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: path.join('fonts', '[name].[contenthash:4][ext]'),
+                },
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+        ],
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'src', 'template.html'),
+            // template: path.join(__dirname, 'src', 'template.pug'),
+            filename: 'index.html',
+        }),
+        new FileManagerPlugin({
+            events: {
+                onStart: {
+                    delete: ['dist'],
+                },
+                onEnd: {
+                    copy: [
+                        {
+                            source: path.join('src', 'static'),
+                            destination: 'dist',
+                        },
+                    ],
+                },
+            }
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash:4].css',
+        }),
+        new VueLoaderPlugin(),
     ],
-  },
+    devServer: {
+        watchFiles: path.join(__dirname, 'src'),
+        port: 9000,
+    },
+    optimization: {
+        minimizer: [
+            new ImageMinimizerPlugin({
+                minimizer: {
+                    implementation: ImageMinimizerPlugin.imageminMinify,
+                    options: {
+                        plugins: [
+                            ['gifsicle', { interlaced: true }],
+                            ['jpegtran', { progressive: true }],
+                            ['optipng', { optimizationLevel: 5 }],
+                            ['svgo', { name: 'preset-default' }],
+                        ],
+                    },
+                },
+            }),
+        ],
+    },
 };
