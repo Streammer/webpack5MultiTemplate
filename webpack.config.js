@@ -71,6 +71,20 @@ module.exports = {
             // template: path.join(__dirname, 'src', 'template.pug'),
             filename: 'index.html',
         }),
+
+        new CopyPlugin({
+          patterns: [
+            {
+              from: "src/fonts",
+              to: path.join(__dirname, 'dist', 'fonts', '[name][ext]')
+            },
+            {
+              from: "src/static",
+              to: path.join(__dirname, 'dist', 'static', '[name][ext]')
+            },
+          ],
+        }),
+        
         new FileManagerPlugin({
             events: {
                 onStart: {
