@@ -14,8 +14,8 @@ module.exports = {
     entry: path.join(__dirname, 'src', 'index.js'),
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'index.[contenthash:4].js',
-        assetModuleFilename: path.join('images', '[name].[contenthash:4][ext]'),
+        filename: 'index.js',
+        assetModuleFilename: path.join('img', '[name][ext]'),
     },
     module: {
         rules: [
@@ -45,6 +45,7 @@ module.exports = {
             {
                 test: /\.(png|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
+               
             },
             {
                 test: /\.svg$/,
@@ -83,6 +84,11 @@ module.exports = {
               from: "src/static",
               to: path.join(__dirname, 'dist', 'static', '[name][ext]')
             },
+            {
+              from: "src/img",
+              to: path.join(__dirname, 'dist', 'img', '[name][ext]')
+            },
+            
           ],
         }),
         

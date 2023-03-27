@@ -18,6 +18,7 @@
     "@volar-plugins/vetur": "latest",
     "@volar/vue-language-plugin-pug": "^1.0.13",
     "@vue/compiler-sfc": "^3.2.45",
+    "copy-webpack-plugin": "^11.0.0",
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.2",
     "filemanager-webpack-plugin": "^8.0.0",
