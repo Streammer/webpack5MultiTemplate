@@ -15,7 +15,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'index.js',
-        assetModuleFilename: path.join('img', '[name][ext]'),
+        assetModuleFilename: path.join('assets/img/[name][ext]'), 
     },
     module: {
         rules: [
