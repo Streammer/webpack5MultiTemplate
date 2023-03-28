@@ -38,11 +38,11 @@ module.exports = {
       patterns: [
         {
           from: "src/fonts",
-          to: path.join(__dirname, 'dist', 'fonts', '[name][ext]')
+          to: path.resolve(__dirname, 'dist', 'fonts', '[name][ext]')
         },
         {
           from: "src/static",
-          to: path.join(__dirname, 'dist', 'static', '[name][ext]')
+          to: path.resolve(__dirname, 'dist', 'static', '[name][ext]')
         },
       ],
     }),
